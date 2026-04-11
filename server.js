@@ -9,7 +9,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-
+//hello world
 // ✅ CONNECT ROUTES
 app.use("/api/auth", authRoutes);
 
