@@ -2,70 +2,49 @@ const mongoose = require("mongoose");
 
 const profileSchema = new mongoose.Schema(
   {
-    userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", unique: true },
 
-    // Personal Info
-    fullName: { type: String, default: "" },
-    email: {
-      type: String,
-      match: /.+\@.+\..+/,
-      default: "",
-    },
-    mobile: { type: String, minlength: 10, maxlength: 10 },
-    dob: { type: String, default: "" },
-    gender: { type: String, default: "Male" },
-    profileImage: { type: String, default: "" },
+    // Personal
+    fullName:    { type: String, default: "" },
+    email:       { type: String, default: "" },
+    mobile:      { type: String, default: "" },
+    dob:         { type: String, default: "" },
+    gender:      { type: String, default: "Male" },
+    profileImage:{ type: String, default: "" },
 
     // Academic
-    highestQualification: String,
-    schoolCollegeName: String,
-    boardUniversity: String,
-    passingYear: String,
-    percentageCgpa: String,
-    subjectStream: String,
-    entranceExam: String,
-    rankScore: String,
+    highestQualification: { type: String, default: "" },
+    schoolCollegeName:    { type: String, default: "" },
+    boardUniversity:      { type: String, default: "" },
+    passingYear:          { type: String, default: "" },
+    percentageCgpa:       { type: String, default: "" },
+    subjectStream:        { type: String, default: "" },
+    entranceExam:         { type: String, default: "" },
+    rankScore:            { type: String, default: "" },
 
     // Address
-    addressLine1: String,
-    addressLine2: String,
-    city: String,
-    state: String,
-    pincode: String,
+    addressLine1: { type: String, default: "" },
+    addressLine2: { type: String, default: "" },
+    city:         { type: String, default: "" },
+    state:        { type: String, default: "" },
+    pincode:      { type: String, default: "" },
 
-    // Documents (🔥 scalable)
-    documents: [
-      {
-        type: { type: String }, // "10th", "aadhaar"
-        file: { type: String },
-      },
-    ],
+    // Documents
+    marksheet10:   { type: String, default: "" },
+    marksheet12:   { type: String, default: "" },
+    idProof:       { type: String, default: "" },
+    passportPhoto: { type: String, default: "" },
 
     // Additional
-    skills: String,
-    interests: String,
-    preferredCourse: String,
-    preferredCollege: String,
+    skills:           { type: String, default: "" },
+    interests:        { type: String, default: "" },
+    preferredCourse:  { type: String, default: "" },
+    preferredCollege: { type: String, default: "" },
 
     // System
     profileCompleted: { type: Boolean, default: false },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
-
-// Index
-profileSchema.index({ userId: 1 });
-
-// Auto completion
-profileSchema.pre("save", function (next) {
-  if (this.fullName && this.email && this.mobile) {
-    this.profileCompleted = true;
-  }
-  next();
-});
 
 module.exports = mongoose.model("Profile", profileSchema);
