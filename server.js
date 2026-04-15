@@ -5,6 +5,7 @@ require("dotenv").config();
 
 const authRoutes = require("./routes/authRoutes");
 const courseRoutes = require("./routes/courseRoutes");
+const profileRoutes = require("./routes/profileRoutes");
 
 const app = express();
 
@@ -14,6 +15,8 @@ app.use(express.json());
 // ✅ CONNECT ROUTES
 app.use("/api/auth", authRoutes);
 app.use("/api/courses", courseRoutes);
+app.use("/api/profile", profileRoutes);
+app.use("/uploads", express.static("uploads"));
 
 // Test route
 app.get("/", (req, res) => {
