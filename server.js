@@ -10,6 +10,7 @@ const profileRoutes     = require("./routes/profileRoutes");
 const adminRoutes       = require("./routes/adminRoutes");
 const publicRoutes      = require("./routes/publicRoutes");
 const applicationRoutes = require("./routes/applicationRoutes");
+const wishlistRoutes    = require("./routes/wishlistRoutes");
 
 const app = express();
 app.use(cors());
@@ -22,6 +23,7 @@ app.use("/api/profile",      profileRoutes);
 app.use("/api/admin",        adminRoutes);
 app.use("/api/public",       publicRoutes);
 app.use("/api/applications", applicationRoutes);
+app.use("/api/wishlist",     wishlistRoutes);
 
 // Health check — returns JSON so Flutter can detect server is awake
 app.get("/", (_, res) => res.json({ status: "ok", time: Date.now() }));
